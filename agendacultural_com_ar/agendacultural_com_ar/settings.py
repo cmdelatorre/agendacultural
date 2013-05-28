@@ -1,7 +1,10 @@
 # Django settings for agendacultural_com_ar project.
+import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 ADMINS = (
     #('Your Name', 'your_email@example.com'),
@@ -32,13 +35,13 @@ TIME_ZONE = 'America/Argentina/Cordoba'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'es-AR'
+LANGUAGE_CODE = 'es-ar'
 
 SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
-USE_I18N = False
+USE_I18N = True
 
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale.
@@ -71,6 +74,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(PROJECT_ROOT, 'agenda', 'static'),
 )
 
 # List of finder classes that know how to find static files in
@@ -107,9 +111,8 @@ ROOT_URLCONF = 'agendacultural_com_ar.urls'
 WSGI_APPLICATION = 'agendacultural_com_ar.wsgi.application'
 
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+    os.path.join(PROJECT_ROOT, 'templates'),
+    os.path.join(PROJECT_ROOT, 'agenda', 'templates'),
 )
 
 INSTALLED_APPS = (

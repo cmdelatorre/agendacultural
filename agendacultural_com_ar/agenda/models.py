@@ -4,38 +4,50 @@ from django.contrib.auth.models import User
 from django.db.models import (Model, CharField, TextField, URLField, EmailField,
                               DateField, ForeignKey, DateTimeField, ImageField,
                               NullBooleanField, IntegerField, ManyToManyField)
+from django.utils.translation import ugettext_lazy as _
 
 
 class Address(Model):
     related_entity = ForeignKey('BasicEntity')
-    street = CharField("calle", max_length=128)
-    number = IntegerField("número", blank=True, null=True)
+    street = CharField(_("street"), max_length=128)
+    number = IntegerField(_("number"), blank=True, null=True)
     extra = CharField("extra", max_length=128, blank=True, null=True)
-    neighbourhood = CharField("barrio/zona", max_length=128, blank=True,
+    neighbourhood = CharField(_("neighborhood"), max_length=128, blank=True,
                               null=True)
-    city = CharField("ciudad", max_length=128)
-    code = CharField("código postal", max_length=128, blank=True, null=True)
-    province = CharField("provincia", max_length=128, blank=True, null=True)
-    country = CharField("país", max_length=128, blank=True, null=True)
-    geo_map = CharField("mapa", max_length=128, blank=True, null=True)
+    city = CharField(_("city"), max_length=128)
+    code = CharField(_("postal code"), max_length=128, blank=True, null=True)
+    province = CharField(_("province"), max_length=128, blank=True, null=True)
+    country = CharField(_("country"), max_length=128, blank=True, null=True)
+    geo_map = CharField(_("map"), max_length=128, blank=True, null=True)
 
+    class Meta:
+        verbose_name = _('address')
+        verbose_name_plural = _("addresses")
 
 class BasicEntity(Model):
-    name = CharField("nombre", max_length=128, db_index=True, error_messages=
+    name = CharField(_("name"), max_length=128, db_index=True, error_messages=
                      {'blank':'Por favor ingrese un nombre o título.',
                       'null':'Por favor ingrese un nombre o título.',})
-    description = TextField("descripción", blank=True, db_index=True)
+    description = TextField(_("description"), blank=True, db_index=True)
     email = EmailField(max_length=254, blank=True)
-    created = DateField("fecha de creación", auto_now_add=True, editable=False)
+    created = DateField(_("creation date"), auto_now_add=True, editable=False)
     photo = ImageField(upload_to='/tmp/', max_length=256, null=True, blank=True)
+
+    class Meta:
+        get_latest_by = "created"
+        ordering = ['-created', 'name']
+
 
     def __unicode__(self):
         return self.name
 
 
 class Artist(BasicEntity):
-    last_name = CharField("apellido", max_length=128, null=True, blank=True)
-
+    last_name = CharField(_("last name"), max_length=128, null=True, blank=True)
+    
+    class Meta:
+        verbose_name = _('artist')
+        verbose_name_plural = _("artists")
 
 class Event(BasicEntity):
     CREATED = "created"
@@ -43,13 +55,13 @@ class Event(BasicEntity):
     CANCELED =  "canceled"
 
     STATUS_CHOICES = (
-        (CREATED, "Creado"),
-        (PUBLISHED, "Publicado"),
-        (CANCELED, "Cancelado"),
+        (CREATED, _(CREATED)),
+        (PUBLISHED, _(PUBLISHED)),
+        (CANCELED, _(CANCELED)),
         )
 
-    short_description = TextField("descripción corta", null=True, blank=True)
-    start_time = DateTimeField("inicio", db_index=True)
+    short_description = TextField(_("short description"), null=True, blank=True)
+    start_time = DateTimeField(_("start time"), db_index=True)
     end_time = DateTimeField("fin", null=True, blank=True)
     # duration se calcula
     artists = ManyToManyField(Artist, null=True, blank=True)

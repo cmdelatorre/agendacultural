@@ -1,0 +1,99 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-05-27 19:53-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: agenda/models.py:12
+msgid "street"
+msgstr "calle"
+
+#: agenda/models.py:13
+msgid "number"
+msgstr "número"
+
+#: agenda/models.py:15
+msgid "neighborhood"
+msgstr "barrio/zona"
+
+#: agenda/models.py:17
+msgid "city"
+msgstr "ciudad"
+
+#: agenda/models.py:18
+msgid "postal code"
+msgstr "código postal"
+
+#: agenda/models.py:19
+msgid "province"
+msgstr "provincia"
+
+#: agenda/models.py:20
+msgid "country"
+msgstr "país"
+
+#: agenda/models.py:21
+msgid "map"
+msgstr "mapa"
+
+#: agenda/models.py:24
+msgid "address"
+msgstr "dirección"
+
+#: agenda/models.py:25
+msgid "addresses"
+msgstr "direcciones"
+
+#: agenda/models.py:28
+msgid "name"
+msgstr "nombre"
+
+#: agenda/models.py:31
+msgid "description"
+msgstr "descripción"
+
+#: agenda/models.py:33
+msgid "creation date"
+msgstr "fecha de creación"
+
+#: agenda/models.py:46
+msgid "last name"
+msgstr "apellido"
+
+#: agenda/models.py:49
+msgid "artist"
+msgstr "artista"
+
+#: agenda/models.py:50
+msgid "artists"
+msgstr "artistas"
+
+#: agenda/models.py:63
+msgid "short description"
+msgstr "descripción corta"
+
+#: agenda/models.py:64
+msgid "start time"
+msgstr "inicio"
+
+#: templates/admin/base_site.html:4
+msgid "Agenda site admin"
+msgstr "Administración del sitio"
+
+#: templates/admin/base_site.html:7
+msgid "Agenda administration"
+msgstr "Administración de la agenda"
