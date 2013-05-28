@@ -10,28 +10,61 @@
 		<meta name="viewport" content="width=device-width" />
 		<title>{% block title %} Agenda cultural {% endblock %}</title>
 		<link rel="stylesheet" href="{% static 'css/foundation.css' %}" />
+		<link rel="stylesheet" href="{% static 'css/app_custom.css' %}" />
 		<script src="{% static 'js/vendor/custom.modernizr.js' %}"></script>
 	</head>
 	<body>
-{% block navbar %}
-	{% include 'agenda/top_navbar.html' %}
-{% endblock %}
 
-	{% if messages %}
-	<div class="alert alert-success">
-		{% for message in messages %}
-			{{ message }}
-		{% endfor %}
-	</div>
-	{% endif %}
+		<div class="row">
+			<div class="small-4 small-offset-8 columns">
+				{% block topbar %}
+					Acá va el login/logout, saludo y search.
+				{% endblock %}
+			</div>
+		</div>
 
-    <div id="wrap">
-      <div class="container">
-        {% block body %}
-        	<!-- Main contents -->
-        {% endblock %}
-      </div>
-    </div>
+		<div class="row">
+		    <div class="twelve columns">
+			    {% block main_title %}
+					<!-- Acá va una imagen con el título de cada sección -->
+				{% endblock %}
+		    </div>
+		</div>
+
+		<div class="row">
+			<div class="twelve columns">
+				{% block main_navbar %}
+					{% include 'agenda/top_navbar.html' %}
+				{% endblock %}
+			</div>
+		</div>
+
+		<!--
+		{% if messages %}
+			<div class="alert alert-success">
+				{% for message in messages %}
+					{{ message }}
+				{% endfor %}
+			</div>
+		{% endif %}
+		-->
+
+		<div class="row">
+			<div class="large-4 columns">
+				<div id="left_sidebar">
+					{% block sidebar %}
+						<!-- Acá la barra lateral -->
+					{% endblock %}
+				</div>
+			</div>
+			</div class="large-8 columns">
+				<div id="main_contents">
+					{% block contents %}
+						<!-- Main contents -->
+					{% endblock %}
+				</div>
+			</div>
+	    </div>
 
 		<script>
 		document.write('<script src=' +
