@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from django.db.models import (Model, CharField, TextField, URLField, EmailField,
                               DateField, ForeignKey, DateTimeField, ImageField,
                               NullBooleanField, IntegerField, ManyToManyField)
@@ -33,13 +34,18 @@ class BasicEntity(Model):
     created = DateField(_("creation date"), auto_now_add=True, editable=False)
     photo = ImageField(upload_to='/tmp/', max_length=256, null=True, blank=True)
 
+    def get_absolute_url(self):
+        entity_class_name = self.__class__.__name__.lower()
+        url_name = entity_class_name+'_details'
+        return reverse(url_name, args=[str(self.id)])
+
+    
+    def __unicode__(self):
+        return self.name
+    
     class Meta:
         get_latest_by = "created"
         ordering = ['-created', 'name']
-
-
-    def __unicode__(self):
-        return self.name
 
 
 class Artist(BasicEntity):
