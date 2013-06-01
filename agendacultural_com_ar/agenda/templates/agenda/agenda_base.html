@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block extra_head %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% endblock %}
+
+{% block topbar %}
+    {% include 'agenda/_top_navbar.html' %}
+{% endblock %}
+
+{% block body_header %}
+
+<div class="well">
+    <h1>Agenda cultural de la ciudad de Córdoba</h1>
+    <p>bña bña  bla.</p>
+    <p><a class="btn btn-primary" href="">Agrega un evento! &raquo;</a></p>
+</div>
+{% endblock %}
+
+{% block main_navbar %}
+    {% include 'agenda/main_navbar.html'%}
+{% endblock %}
+
+{% block container %}
+
+<div class="row-fluid">
+    <div class="span3">
+        {% block left_sidebar %}
+            {% include 'agenda/_left_sidebar.html'%}
+        {% endblock %}
+    </div>
+    <div class="span9">
+        <div class="row-fluid">
+            {% block main_contents %}
+                <!-- Here is where most of the magic will happen -->
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+    {% include 'agenda/_footer.html' %}
+{% endblock %}

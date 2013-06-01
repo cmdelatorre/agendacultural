@@ -1,0 +1,10 @@
+{% extends "agenda/agenda_base.html" %}
+{% load agenda_custom %}
+
+{% block main_contents %}
+    {% for event in events_list %}
+        {{ event|event_widget }}
+    {% empty %}
+        <p> Lo sentimos, pero actualmente no hay eventos cargados. </p>
+    {% endfor %}
+{% endblock %}
