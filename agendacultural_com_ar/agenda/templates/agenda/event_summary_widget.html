@@ -1,0 +1,34 @@
+{% load staticfiles %}
+{% load agenda_custom %}
+
+<div class="row-fluid well event-summary">
+	<div class="row-fluid">	
+		<!-- Top line -->
+	    <div class="span6">
+	    	<h4>{{ event|get_nice_link:'upper' }}</h4>
+	    </div>
+		<div class="span6">
+	    	<h6 class="text-right">{{ event.venue|get_nice_link }}</h6>
+	    </div>
+	</div>
+	    <hr>
+	<div class="row-fluid">	
+	    <!-- Main: photo and description -->
+		<div class="span3">
+	    	<img src="{% static 'agenda/img/event_default_image.png' %}"> {# event.photo #}
+	    </div>
+	    <div class="span9">
+	    	<p>{{ event.short_description }}</p>
+	    </div>
+	</div>
+	    <hr>
+	<div class="row-fluid">	
+	    <!-- Bottom: address and tickets -->
+	    <div class="span6">
+	    	<p class="text-success">{{ event.venue.get_address }}</p>
+	    </div>
+		<div class="span6">
+	    	<p class="text-right text-success">{{ event.tickets }}</p>
+	    </div>
+	</div>
+</div>

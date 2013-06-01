@@ -1,7 +1,9 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 
 {% block extra_head %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'agenda/css/agenda_custom_style.css' %}">
 {% endblock %}
 
 {% block topbar %}
@@ -22,22 +24,22 @@
 {% endblock %}
 
 {% block container %}
-
-<div class="row-fluid">
-    <div class="span3">
-        {% block left_sidebar %}
-            {% include 'agenda/_left_sidebar.html'%}
-        {% endblock %}
-    </div>
-    <div class="span9">
-        <div class="row-fluid">
-            {% block main_contents %}
-                <!-- Here is where most of the magic will happen -->
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span3">
+            {% block left_sidebar %}
+                {% include 'agenda/_left_sidebar.html'%}
             {% endblock %}
+        </div>
+        <div class="span9">
+            <div class="row-fluid">
+                {% block main_contents %}
+                    <!-- Here is where most of the magic will happen -->
+                {% endblock %}
+            </div>
         </div>
     </div>
 </div>
-
 {% endblock %}
 
 {% block footer %}

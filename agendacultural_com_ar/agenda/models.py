@@ -20,6 +20,15 @@ class Address(Model):
     province = CharField(_("province"), max_length=128, blank=True, null=True)
     country = CharField(_("country"), max_length=128, blank=True, null=True)
     geo_map = CharField(_("map"), max_length=128, blank=True, null=True)
+    
+    def __unicode__(self):
+        addres_str = self.street
+        if self.number:
+            addres_str += ' %i, '%self.number
+        aux_fields = [self.extra, self.code, self.city, self.province]
+        addres_str += u', '.join(filter(None, aux_fields))
+        return addres_str
+
 
     class Meta:
         verbose_name = _('address')
@@ -117,3 +126,6 @@ class Venue(BasicEntity):
                                blank=True)
     can_eat = NullBooleanField("se puede comer?", default=False, blank=True)
     can_dance = NullBooleanField("se puede bailar?", default=False, blank=True)
+
+    def get_address(self):
+        return self.address_set.get()
