@@ -65,14 +65,18 @@ class Artist(BasicEntity):
         verbose_name_plural = _("artists")
 
 class Event(BasicEntity):
-    CREATED = "created"
-    PUBLISHED =  "published"
-    CANCELED =  "canceled"
+    CREATED, CREATED_TEXT = ("cre", "created")
+    PUBLISHED, PUBLISHED_TEXT =  ("pub", "published")
+    CANCELED, CANCELED_TEXT =  ("can", "canceled")
+    WEB_PUBLISHED, WEB_PUBLISHED_TEXT =  ("wpub", "published (web)")
+    WEB_WATCHLIST, WEB_WATCHLIST_TEXT =  ("wwat", "watchlist (web)")
 
     STATUS_CHOICES = (
-        (CREATED, _(CREATED)),
-        (PUBLISHED, _(PUBLISHED)),
-        (CANCELED, _(CANCELED)),
+        (CREATED, _(CREATED_TEXT)),
+        (PUBLISHED, _(PUBLISHED_TEXT)),
+        (CANCELED, _(CANCELED_TEXT)),
+        (WEB_PUBLISHED, _(WEB_PUBLISHED_TEXT)),
+        (WEB_WATCHLIST, _(WEB_WATCHLIST_TEXT)),
         )
 
     short_description = TextField(_("short description"), null=True, blank=True)

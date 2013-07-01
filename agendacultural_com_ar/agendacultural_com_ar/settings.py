@@ -1,10 +1,15 @@
 # Django settings for agendacultural_com_ar project.
-import os
+import os, sys
+
+
+# directory, filename = os.path.split(os.path.realpath(__file__))
+# sys.path.append(directory)
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(PROJECT_ROOT)
 
 ADMINS = (
     #('Your Name', 'your_email@example.com'),
