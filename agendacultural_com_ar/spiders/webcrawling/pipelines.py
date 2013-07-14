@@ -9,20 +9,18 @@ class ToAgendaDB(object):
         # If already exists: log and add url.
         #    Verify Venue: if different: add as web_watchlist (different venue)
         # If title exist and time 'soon', add as web_watchlist (possible repeat)
-        import ipdb; ipdb.set_trace()
         if not item.get('venue'):
             raise DropItem("Venue not found for event %s" % str(item))
+        import ipdb; ipdb.set_trace()
         venue, created = Venue.objects.get_or_create(name=item.get('venue'))
         match = False  # flag True if the event exist aand the venue matches.
         good_timing = False #  flag True if the event has same start time.
-        event_id = None
         event_query = Event.objects.filter(name=item.get('name'))
         if event_query.exists():
             event = event_query[0]
-            event_id = event.id
             match = self.verify_events_venue(event, venue)
             good_timing = self.verify_event_timing(event, item)
-            if match and goodtiming:
+            if match and good_timing:
                 raise DropItem("Event exists in DB (id=%s)" % str(event.id))
         else:
             event = self._create_new_event(item, venue,
