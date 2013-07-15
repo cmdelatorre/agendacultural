@@ -2,12 +2,62 @@
 
 {% block main_contents %}
 
-<h2>Próximos eventos</h2>
+Archive for {{ month|date:"F" }} {{ month.year }}<br />
 
-<p>Bla bla bla</p>
+<table class="table table-bordered table-striped table-hover table-condensed" width="100%">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Details</th>
+        <th>Venue</th>
+        <th>Starts</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for obj in object_list %}
+        <tr>
+            <td><a href="{{ obj.get_absolute_url }}">{{ obj.name }}</a></td>
+            <td>{{ obj.short_description }}</td>
+            <td><a href="{{ obj.venue.get_absolute_url }}">{{ obj.venue }}</a></td>
+            <td>{{ obj.start_time|date:"d/m/Y" }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
 
-<p><a class="btn" href="http://twitter.github.com/bootstrap/">Botones &raquo;</a></p>
+<div class="pagination pull-right">
+    <ul>
+        {% if previous_month %}
+            <li class="prev">
+                <a href="{% url 'home' %}?year={{ previous_month|date:"Y"  }}&month={{ previous_month|date:"b" }}">
+                    &larr; {{ previous_month|date:"M Y" }}
+                </a>
+            </li>
+        {% endif %}
+        {% if next_month %}
+            <li class="next">
+                <a href="{% url 'home' %}?year={{ next_month|date:"Y"  }}&month={{ next_month|date:"b" }}">
+                    {{ next_month|date:"M Y" }} &rarr;</a>
+            </li>
+        {% endif %}
+    </ul>
+</div>
 
-<p>A big thanks to all the people that worked on Django and Bootstrap.</p>
+{% if is_paginated %}
+    <div class="pagination pull-left">
+        <ul>
+            <li class="{% if page_obj.has_previous %}prev {% else %} prev disabled {% endif %}">
+                <a href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}&year={{ month|date:"Y" }}&month={{ month|date:"b" }}{% else %}#{% endif %}">&larr;</a></li>
+            <li class="disabled"><a href="#"><strong>{{ page_obj.number }} of {{ paginator.num_pages }}</strong></a></li>
+
+            <li class="{% if page_obj.has_next %}next{% else %} next disabled {% endif %}">
+                <a href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}&year={{ month|date:"Y" }}&month={{ month|date:"b" }}{% else %}#{% endif %}">&rarr;</a>
+            </li>
+
+        </ul>
+    </div>
+{% endif %}
+
+
 
 {% endblock %}

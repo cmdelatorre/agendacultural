@@ -1,4 +1,4 @@
-import datetime
+from django.utils import datetime_safe
 
 from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
 from scrapy.contrib.spiders import CrawlSpider, Rule
@@ -31,7 +31,6 @@ class VosSpider(CrawlSpider):
                 './/div[@class="texto"]/p/text()').extract()[0]
             # description
             # photo
-            import ipdb; ipdb.set_trace()
             start_date = None
             end_date = None
             venue = None
@@ -44,11 +43,24 @@ class VosSpider(CrawlSpider):
                 elif 'Termina:' in line:
                     end_date = data
                 elif 'Lugar y Hora:' in line:
-                    venue, time = self.extract_venue_time(data)
-
+                    try:
+                        venue, time = self.extract_venue_time(data)
+                    except Exception, e:
+                        print "Problem with venue_time in ", event, line, data
+                        event['end_time'] = datetime_safe.datetime.min
+                    
             event['venue'] = venue
-            event['start_time'] = self.build_date_time(start_date, time)
-            event['end_time'] = self.build_date_time(end_date, time)
+            
+            try:
+                event['start_time'] = self.build_date_time(start_date, time)
+            except Exception, e:
+                print "Problem with start_time in ", event, start_date, time
+                event['start_time'] = datetime_safe.datetime.min
+            try:
+                event['end_time'] = self.build_date_time(end_date, time)
+            except Exception, e:
+                print "Problem with end_time in ", event, start_date, time
+                event['end_time'] = datetime_safe.datetime.min
             # artists
             # tickets             
             event_items.append(event)
@@ -69,6 +81,22 @@ class VosSpider(CrawlSpider):
     def build_date_time(self, date, time):
         """Build a datetime object from the given strings. The date is something
         like 'Jueves 11 de julio 2013' and the time '21.30'."""
-        return datetime.datetime.now()
+        month_names = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 
+                       'julio', 'agosto', 'septiembre', 'octubre', 'noviembre',
+                       'diciembre']
+        day_str_to_int = dict(zip(month_names, range(len(month_names))))
+        _, d, _, m, a = date.split()
+        m = day_str_to_int[m]
+        a, m, d = map(int, (a, m ,d))
+        hh = 0
+        mm = 0
+        time = time.split('.')
+        if len(time) == 1:
+            hh = int(time[0])
+            mm = 0
+        elif len(time) == 2:
+            hh, mm = map(int, time) 
+        
+        return datetime_safe.datetime(a, m, d, hh, mm)
 
 

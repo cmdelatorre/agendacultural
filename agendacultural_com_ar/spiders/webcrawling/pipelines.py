@@ -11,7 +11,6 @@ class ToAgendaDB(object):
         # If title exist and time 'soon', add as web_watchlist (possible repeat)
         if not item.get('venue'):
             raise DropItem("Venue not found for event %s" % str(item))
-        import ipdb; ipdb.set_trace()
         venue, created = Venue.objects.get_or_create(name=item.get('venue'))
         match = False  # flag True if the event exist aand the venue matches.
         good_timing = False #  flag True if the event has same start time.

@@ -93,7 +93,6 @@ class Event(BasicEntity):
                        default=CREATED)
     #public = ManyToManyField(User, blank=True, related_name='events_participation')
 
-
 class Group(Artist):
     integrants = ManyToManyField(Artist, null=True, blank=True,
                                  related_name='groups')
