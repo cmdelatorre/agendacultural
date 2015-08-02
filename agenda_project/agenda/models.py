@@ -21,7 +21,7 @@ class Address(Model):
     country = CharField(_("country"), max_length=128, blank=True, null=True)
     geo_map = CharField(_("map"), max_length=128, blank=True, null=True)
 
-    def __unicode__(self):
+    def str(self):
         addres_str = self.street
         if self.number:
             addres_str += ' %i, '%self.number
@@ -62,7 +62,7 @@ class BasicEntity(Model):
         return reverse(url_name, args=[str(self.id)])
 
 
-    def __unicode__(self):
+    def str(self):
         return self.name
 
     class Meta:
@@ -132,7 +132,7 @@ class Phone(Model):
         default=MOBILE,
     )
 
-    def __unicode__(self):
+    def str(self):
         return self.number
 
 
