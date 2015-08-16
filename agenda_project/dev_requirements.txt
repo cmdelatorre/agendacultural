@@ -1,0 +1,6 @@
+# These I use for development but are not necessary
+
+-r requirements.txt
+ipython
+django-extensions
+Werkzeug
