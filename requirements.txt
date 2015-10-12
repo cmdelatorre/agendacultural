@@ -6,5 +6,4 @@ nodeenv
 # and then:
 # $ nodeenv --node=4.1.2 --prebuilt -p
 # $ npm install -g bower
-
-django-bower==5.0.4
+# $ cd frontend; bower install

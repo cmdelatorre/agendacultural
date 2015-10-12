@@ -71,7 +71,6 @@ class BasicEntity(Model):
 
 
 class Artist(BasicEntity):
-    last_name = CharField(_("last name"), max_length=128, null=True, blank=True)
 
     class Meta:
         verbose_name = _('artist')

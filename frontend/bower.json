@@ -6,7 +6,8 @@
     "json2": "*",
     "backbone.marionette": "~2.4.3",
     "underscore": "~1.8.3",
-    "jquery": "~2.1.4"
+    "jquery": "~2.1.4",
+    "requirejs": "~2.1.20"
   },
   "homepage": "https://github.com/cmdelatorre/agendacultural",
   "authors": [

@@ -36,7 +36,7 @@ require([
 	'app',
     'jquery',
 	'bootstrap'
-], function (app) {
+], function (app, $) {
 	'use strict';
 
 	app.start();

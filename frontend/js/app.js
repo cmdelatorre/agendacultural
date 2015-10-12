@@ -4,13 +4,14 @@ define(function (require) {
 	'use strict';
 
     var AppRouter = require('router'),
+        ArtistsManager = require('views/artists_manager'),
         Backbone = require('backbone'),
         DialogRegion = require('regions/dialog'),
         Footer = require('views/Footer'),
         HomeView = require('views/HomeView'),
         Marionette = require('marionette'),
         MenuView = require('views/MenuView'),
-        Nav = require('collections/Nav'),
+        Nav = require('collections/nav'),
         NotifyRegion = require('regions/notification'),
         PageView = require('views/PageView');
 
@@ -19,7 +20,7 @@ define(function (require) {
 
     app.pages = new Nav([
         {title: 'Home', name: 'home', active: true},
-        {title: 'New event', name: 'new_event'},
+        {title: 'New event', name: 'event'},
         {title: 'About', name: 'about'},
         {title: 'Contact', name: 'contact'}
     ]);
@@ -47,9 +48,11 @@ define(function (require) {
                 console.log('Router => Showing page: ' + pageName);
                 var pageModel = app.pages.findWhere({name: pageName});
 
-                app.vent.trigger('menu:activate', pageModel);
+                //app.vent.trigger('menu:activate', pageModel);
                 if(pageName == 'home') {
                     app.main.show(new HomeView({model: pageModel}));
+                } else if(pageName == 'artists') {
+                    app.main.show(new ArtistsManager());
                 } else {
                     app.main.show(new PageView({model: pageModel}));
                 }
@@ -60,12 +63,10 @@ define(function (require) {
         }
     });
 
-	app.addInitializer(function () {
+    app.on("start", function(options){
         app.menu.show(menu);
 		app.footer.show(new Footer());
-	});
 
-    app.on("start", function(options){
         if (Backbone.history){
             Backbone.history.start();
         }
