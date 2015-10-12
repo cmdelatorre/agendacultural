@@ -13,7 +13,8 @@ define(function (require) {
         MenuView = require('views/MenuView'),
         Nav = require('collections/nav'),
         NotifyRegion = require('regions/notification'),
-        PageView = require('views/PageView');
+        PageView = require('views/PageView'),
+        Radio = require('backbone.radio');
 
 
 	var app = new Marionette.Application();
