@@ -4,3 +4,4 @@
 ipython
 django-extensions
 Werkzeug
+nose

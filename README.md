@@ -31,7 +31,8 @@ Projecto Django que provea una API REST (mediante DRF).
 
 ### Frontend
 
-SPA (_single page app_) basada en Ember (o equivalente).
+SPA (_single page app_) basada en https://github.com/ajaxray/marionette-boilerplate
+
 
 ### Data
 

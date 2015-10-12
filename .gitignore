@@ -4,3 +4,4 @@
 *.sqlite3
 local_settings.py
 agenda_project/agenda_project/dev_settings.py
+frontend/bower_components/
