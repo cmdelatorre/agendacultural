@@ -1,0 +1,10 @@
+Django==1.8.5
+djangorestframework==3.2.4
+Pillow==3.0.0
+
+nodeenv
+# and then:
+# $ nodeenv --node=4.1.2 --prebuilt -p
+# $ npm install -g bower
+
+django-bower==5.0.4
